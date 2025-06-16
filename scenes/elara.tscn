@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdu5xevqv6w3s"]
+
+[ext_resource type="PackedScene" uid="uid://b5w5a0n0q0x0x" path="res://scenes/base_character.tscn" id="1_basechar"]
+[ext_resource type="Script" path="res://scripts/elara.gd" id="2_elarascript"]
+
+[node name="Elara" instance=ExtResource("1_basechar")]
+script = ExtResource("2_elarascript")
+
+# Elara specific overrides can be done here if needed,
+# for example, changing the Sprite2D texture.
+# [node name="Sprite2D" parent="." index="0"]
+# texture = ExtResource("res://assets/art/elara_sprite.png") # Example path

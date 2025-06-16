@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5w5a0n0q0x0x"]
+
+[ext_resource type="Script" path="res://scripts/base_character.gd" id="1_charscript"]
+
+[node name="BaseCharacter" type="Node2D"]
+script = ExtResource("1_charscript")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+# Placeholder texture, actual art will be assigned per character
+# For now, let's use the Godot icon as a placeholder if available,
+# or just leave it empty if not.
+# texture = ExtResource("res://icon.svg")
+position = Vector2(0, -30) # Position sprite slightly above the node's origin
+
+[node name="HPLabel" type="Label" parent="."]
+offset_left = -25.0
+offset_top = 10.0
+offset_right = 25.0
+offset_bottom = 33.0
+text = "HP: 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+# Basic collision shape, can be adjusted later
+# shape = SubResource("CircleShape2D_xxxx") # Example, would need SubResource definition
+pass
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+pass
