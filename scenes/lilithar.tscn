@@ -6,11 +6,7 @@
 [node name="Lilithar" instance=ExtResource("1_basechar")]
 script = ExtResource("2_lilitharscript")
 
-# Lilithar specific visual overrides can be done here if needed.
-# For example, changing the Sprite2D texture, scale, or adding particle effects.
-# [node name="Sprite2D" parent="." index="0"]
-# scale = Vector2(2, 2) # Make boss visually larger
-# texture = ExtResource("res://assets/art/bosses/lilithar_phase1.png") # Example path
+
 
 # HPLabel might need to be repositioned or styled differently for a large boss.
 # [node name="HPLabel" parent="." index="1"]

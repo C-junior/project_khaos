@@ -65,7 +65,7 @@ var enemy_type_data: Dictionary = {
 		"name": "Lilithar, Empress of Torment", # This name is overridden by Lilithar.gd's _init anyway
 		"scene": preload("res://scenes/lilithar.tscn"), # Special scene for Lilithar
 		"stats": {}, # Stats are defined in Lilithar.gd _init() and phases.
-		              # Can put base stats here if desired, but script will override.
+					  # Can put base stats here if desired, but script will override.
 		"sprite": null # Sprite is handled by Lilithar.tscn and script.
 	}
 }

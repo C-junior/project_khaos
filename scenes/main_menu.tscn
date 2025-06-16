@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bu2a7wxt4caoj"]
+[gd_scene load_steps=3 format=3 uid="uid://bu2a7wxt4caoj"]
 
 [ext_resource type="Script" uid="uid://mwa5g74263xl" path="res://scripts/main_menu.gd" id="1_u5h5k"]
+[ext_resource type="Texture2D" uid="uid://c0a8tdao1mxuc" path="res://assets/art/mage.jpg" id="2_ekxnf"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -53,6 +54,9 @@ offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Quit"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_ekxnf")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
