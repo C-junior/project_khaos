@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dptk0j0x0y0x0"]
+
+[ext_resource type="PackedScene" uid="uid://b5w5a0n0q0x0x" path="res://scenes/base_character.tscn" id="1_basechar"]
+[ext_resource type="Script" path="res://scripts/lyra.gd" id="2_lyrascript"]
+
+[node name="Lyra" instance=ExtResource("1_basechar")]
+script = ExtResource("2_lyrascript")
+
+# Lyra specific overrides
+# [node name="Sprite2D" parent="." index="0"]
+# texture = ExtResource("res://assets/art/lyra_sprite.png") # Example path

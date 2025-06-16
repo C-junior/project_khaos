@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dglilithar001"]
+
+[ext_resource type="PackedScene" uid="uid://b5w5a0n0q0x0x" path="res://scenes/base_character.tscn" id="1_basechar"]
+[ext_resource type="Script" path="res://scripts/lilithar.gd" id="2_lilitharscript"]
+
+[node name="Lilithar" instance=ExtResource("1_basechar")]
+script = ExtResource("2_lilitharscript")
+
+# Lilithar specific visual overrides can be done here if needed.
+# For example, changing the Sprite2D texture, scale, or adding particle effects.
+# [node name="Sprite2D" parent="." index="0"]
+# scale = Vector2(2, 2) # Make boss visually larger
+# texture = ExtResource("res://assets/art/bosses/lilithar_phase1.png") # Example path
+
+# HPLabel might need to be repositioned or styled differently for a large boss.
+# [node name="HPLabel" parent="." index="1"]
+# offset_top = -80.0 # Example: Move HP label further up if sprite is large
+# offset_bottom = -57.0
+# theme_override_font_sizes/font_size = 20 # Larger font for boss HP

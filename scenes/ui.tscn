@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1qo7qj1v2x8q"]
+
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_xyz12"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xyz12")
+
+[node name="PlayerStatsLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 120.0
+offset_bottom = 46.0
+text = "Health: 100
+Score: 0"
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -100.0 # Adjust width as needed
+offset_top = 20.0
+offset_right = 100.0 # Adjust width as needed
+offset_bottom = 46.0
+grow_horizontal = 2
+text = "Total Score: 0"
+horizontal_alignment = 1
+
+[node name="RewardNotificationLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -80.0 # Position above bottom edge
+offset_right = 200.0
+offset_bottom = -50.0 # Adjust height
+grow_horizontal = 2
+grow_vertical = 0
+text = "New Reward Unlocked!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = TextServer.AUTOWRAP_WORD
+visible = false # Initially hidden
