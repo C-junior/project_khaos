@@ -11,14 +11,34 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xyz12")
 
+[node name="HPIcon" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 20.0
+offset_right = 25.0 # Assuming 20x20 icon
+offset_bottom = 40.0
+expand_mode = 1 # Keep aspect ratio, fit inside rect
+
 [node name="PlayerStatsLabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 20.0
+offset_left = 30.0 # Shifted right for icon
 offset_top = 20.0
-offset_right = 120.0
+offset_right = 130.0 # Adjusted
 offset_bottom = 46.0
 text = "Health: 100
 Score: 0"
+
+[node name="TotalScoreIcon" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.0 # To the left of ScoreLabel
+offset_top = 20.0
+offset_right = -110.0 # Assuming 20x20 icon
+offset_bottom = 40.0
+grow_horizontal = 2
+expand_mode = 1
 
 [node name="ScoreLabel" type="Label" parent="."]
 layout_mode = 1

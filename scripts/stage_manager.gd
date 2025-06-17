@@ -48,7 +48,7 @@ func _ready():
 	stage_definitions = [
 		{
 			"name": "Training Grounds", # Renamed first stage
-			"scene_file": null, # No specific scene file, uses default background
+			"background_texture_path": null, # Example: "res://assets/art/backgrounds/training_grounds_bg.png"
 			"waves": [
 				{"enemies": [{"type": "goblin_grunt", "count": 1}], "description": "A lone Goblin Grunt"},
 				{"enemies": [{"type": "goblin_grunt", "count": 2}], "description": "A couple of Goblin Grunts"}
@@ -58,7 +58,7 @@ func _ready():
 		},
 		{
 			"name": "Forgotten Path", # Renamed second stage
-			"scene_file": null,
+			"background_texture_path": null, # Example: "res://assets/art/backgrounds/forgotten_path_bg.png"
 			"waves": [
 				{"enemies": [{"type": "goblin_grunt", "count": 1}, {"type": "orc_brute", "count": 1}], "description": "A Goblin and an Orc"},
 				{"enemies": [{"type": "orc_brute", "count": 2}], "description": "Two Orc Brutes"}
@@ -68,7 +68,7 @@ func _ready():
 		},
 		{
 			"name": "Haunted Woods",
-			"scene_file": "res://scenes/haunted_woods.tscn", # Path to visual scene
+			"background_texture_path": null, # Example: "res://assets/art/backgrounds/haunted_woods_bg.png" (was res://scenes/haunted_woods.tscn)
 			"waves": [
 				{"enemies": [{"type": "wraith", "count": 2}], "description": "Wispy Wraiths"}, # New enemy type
 				{"enemies": [{"type": "skeleton_warrior", "count": 1}, {"type": "wraith", "count": 1}], "description": "A Skeleton and a Wraith"}, # New enemy types
@@ -79,7 +79,7 @@ func _ready():
 		},
 		{
 			"name": "Cursed Cathedral",
-			"scene_file": "res://scenes/cursed_cathedral.tscn",
+			"background_texture_path": null, # Example: "res://assets/art/backgrounds/cursed_cathedral_bg.png" (was res://scenes/cursed_cathedral.tscn)
 			"waves": [
 				{"enemies": [{"type": "cultist_acolyte", "count": 3}], "description": "Acolytes of the Damned"}, # New enemy type
 				{"enemies": [{"type": "skeleton_warrior", "count": 2}, {"type": "cultist_acolyte", "count": 1}], "description": "Skeletal Guardians and an Acolyte"},
@@ -90,7 +90,7 @@ func _ready():
 		},
 		{
 			"name": "Infernal Wastes",
-			"scene_file": "res://scenes/infernal_wastes.tscn",
+			"background_texture_path": null, # Example: "res://assets/art/backgrounds/infernal_wastes_bg.png" (was res://scenes/infernal_wastes.tscn)
 			"waves": [
 				{"enemies": [{"type": "demon_imp", "count": 3}], "description": "Swarm of Demon Imps"}, # New enemy type
 				{"enemies": [{"type": "lava_elemental", "count": 2}], "description": "Burning Lava Elementals"}, # New enemy type
@@ -101,7 +101,7 @@ func _ready():
 		},
 		{
 			"name": "Abyssal Citadel",
-			"scene_file": "res://scenes/abyssal_citadel.tscn",
+			"background_texture_path": null, # Example: "res://assets/art/backgrounds/abyssal_citadel_bg.png" (was res://scenes/abyssal_citadel.tscn)
 			"waves": [
 				{"enemies": [{"type": "demon_imp", "count": 2}, {"type": "lava_elemental", "count": 1}], "description": "Guardians of the Approach"},
 				{"enemies": [{"type": "cultist_acolyte", "count": 2, "name_override": "Lilithar's Chosen"}, {"type": "wraith", "count": 2, "name_override": "Tormented Soul"}], "description": "Lilithar's Chosen and their escorts"},
@@ -147,6 +147,17 @@ func start_next_stage():
 	var stage_data = stage_definitions[current_stage_index]
 	emit_signal("stage_started", current_stage_index + 1) # User-friendly stage number
 	print("Starting Stage %s: %s" % [current_stage_index + 1, stage_data.name])
+
+	# Update background texture
+	var bg_texture_path = stage_data.get("background_texture_path", null)
+	if bg_texture_path and not bg_texture_path.is_empty():
+		var bg_texture = load(bg_texture_path)
+		if bg_texture and game_node and game_node.has_method("update_stage_background"):
+			game_node.update_stage_background(bg_texture)
+		elif not bg_texture:
+			printerr("StageManager: Failed to load background texture: %s" % bg_texture_path)
+	elif game_node and game_node.has_method("update_stage_background"): # No path, clear background or set to default
+		game_node.update_stage_background(null) # Or a default placeholder texture from Game.gd
 
 	if audio_manager:
 		var music_name = stage_data.get("music", "default_battle_music") # Get stage specific music or default

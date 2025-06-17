@@ -16,6 +16,9 @@ var audio_manager: AudioManager # Added AudioManager
 # Reference to the UI script/node
 var ui_node # Assuming UI scene is a child of Game node and has script ui.gd
 # Example: @onready var ui_node = $UI (if UI is a child node named UI)
+@onready var stage_background_sprite: Sprite2D = $StageBackgroundSprite # Added
+
+@export var initial_stage_background: Texture # Assign in Inspector
 
 var player_party: Array[BaseCharacter] = []
 var player_crimson_veil_relic: CrimsonVeilRelic = null # Holds the instance if player has it
@@ -24,11 +27,24 @@ var player_crimson_veil_relic: CrimsonVeilRelic = null # Holds the instance if p
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("Game scene loaded. Initializing managers and player party...")
+	if initial_stage_background and stage_background_sprite:
+		stage_background_sprite.texture = initial_stage_background
+
 	setup_player_party()
 	setup_managers()
 
 	# StageManager now controls combat initiation
 	stage_manager.start_first_stage()
+
+func update_stage_background(new_background_texture: Texture):
+	if stage_background_sprite:
+		if new_background_texture:
+			stage_background_sprite.texture = new_background_texture
+		else:
+			printerr("update_stage_background called with null texture.")
+	else:
+		printerr("StageBackgroundSprite node not found in Game scene.")
+
 
 func setup_player_party():
 	# Player Party
