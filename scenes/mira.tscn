@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b3vjklwa8tcw9"]
+[gd_scene load_steps=4 format=3 uid="uid://b3vjklwa8tcxa"]
 
 [ext_resource type="PackedScene" uid="uid://b5w5a0n0q0x0x" path="res://scenes/base_character.tscn" id="1_basechar"]
-[ext_resource type="Script" path="res://scripts/mira.gd" id="2_mirascript"]
+[ext_resource type="Script" uid="uid://8atnpq8w4c8j" path="res://scripts/mira.gd" id="2_mirascript"]
+[ext_resource type="Texture2D" uid="uid://bxnkcdk47ao02" path="res://icon.svg" id="3_5v6yw"]
 
 [node name="Mira" instance=ExtResource("1_basechar")]
 script = ExtResource("2_mirascript")
 
-# Mira specific overrides
-# [node name="Sprite2D" parent="." index="0"]
-# texture = ExtResource("res://assets/art/mira_sprite.png") # Example path
+[node name="VisualSprite" parent="." index="0"]
+texture = ExtResource("3_5v6yw")

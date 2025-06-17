@@ -45,8 +45,8 @@ func setup_combat(p_party: Array[BaseCharacter], e_party: Array[BaseCharacter]):
 
 	# Connect signals and pass AudioManager for all combatants
 	for combatant in all_combatants:
-		if self.audio_manager and combatant.has_variable("audio_manager"): # Check if var exists
-			combatant.audio_manager = self.audio_manager
+		#if self.audio_manager and combatant.has_variable("audio_manager"): # Check if var exists
+			#combatant.audio_manager = self.audio_manager
 
 		if not combatant.is_connected("health_changed", Callable(self, "_on_combatant_health_changed")):
 			combatant.connect("health_changed", Callable(self, "_on_combatant_health_changed"))

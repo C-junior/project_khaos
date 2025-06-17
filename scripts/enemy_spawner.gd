@@ -22,7 +22,7 @@ var enemy_type_data: Dictionary = {
 		"name": "Goblin Grunt",
 		"scene": BaseCharacterScene,
 		"stats": {"max_hp": 40, "current_hp": 40, "attack_power": 7, "defense": 3, "speed": 8, "crit_chance": 0.05, "crit_damage_multiplier": 1.5},
-		"sprite": null # Example: "res://assets/art/enemies/goblin_grunt_sprite.png"
+		"sprite": "res://assets/art/elara.png"
 	},
 	"orc_brute": {
 		"name": "Orc Brute",
