@@ -4,3 +4,10 @@
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_abcde")
+
+[node name="StageBackgroundSprite" type="Sprite2D" parent="."]
+z_index = -10 # Ensure it's drawn behind everything else
+# Position and scale would typically be set to cover the screen.
+# Example: (assuming a 1152x648 screen size, texture centered)
+# position = Vector2(576, 324)
+# Consider using a TextureRect if UI anchoring is preferred for background

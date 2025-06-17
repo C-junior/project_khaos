@@ -20,53 +20,52 @@ var spawn_parent: Node
 var enemy_type_data: Dictionary = {
 	"goblin_grunt": {
 		"name": "Goblin Grunt",
-		"scene": BaseCharacterScene, # Or specific GoblinScene if you have one
+		"scene": BaseCharacterScene,
 		"stats": {"max_hp": 40, "current_hp": 40, "attack_power": 7, "defense": 3, "speed": 8, "crit_chance": 0.05, "crit_damage_multiplier": 1.5},
-		"sprite": null # "res://assets/art/enemies/goblin_grunt.png"
+		"sprite": null # Example: "res://assets/art/enemies/goblin_grunt_sprite.png"
 	},
 	"orc_brute": {
 		"name": "Orc Brute",
-		"scene": BaseCharacterScene, # Or specific OrcScene
+		"scene": BaseCharacterScene,
 		"stats": {"max_hp": 75, "current_hp": 75, "attack_power": 12, "defense": 5, "speed": 6, "crit_chance": 0.05, "crit_damage_multiplier": 1.5},
-		"sprite": null # "res://assets/art/enemies/orc_brute.png"
+		"sprite": null # Example: "res://assets/art/enemies/orc_brute_sprite.png"
 	},
-	"elara_clone": { # Example of a tougher, unique enemy
+	"elara_clone": {
 		"name": "Elara's Shadow",
-		"scene": ElaraScene, # Uses Elara's scene but we can override stats
-		"stats": {"max_hp": 90, "current_hp": 90, "attack_power": 12, "defense": 4, "speed": 12, "crit_chance": 0.15, "crit_damage_multiplier": 1.6}, # Default Elara stats
-		# "sprite": "res://assets/art/enemies/elara_shadow_sprite.png" # Potentially a darkened sprite
+		"scene": ElaraScene,
+		"stats": {"max_hp": 90, "current_hp": 90, "attack_power": 12, "defense": 4, "speed": 12, "crit_chance": 0.15, "crit_damage_multiplier": 1.6},
+		"sprite": null # Example: "res://assets/art/enemies/elara_shadow_sprite.png"
 	},
 	"wraith": {
 		"name": "Wraith", "scene": BaseCharacterScene,
-		"stats": {"max_hp": 60, "current_hp": 60, "attack_power": 10, "defense": 5, "speed": 11, "crit_chance": 0.1, "crit_damage_multiplier": 1.5}, # Might be resistant to physical, weak to magic
-		"sprite": null # "res://assets/art/enemies/wraith.png"
+		"stats": {"max_hp": 60, "current_hp": 60, "attack_power": 10, "defense": 5, "speed": 11, "crit_chance": 0.1, "crit_damage_multiplier": 1.5},
+		"sprite": null
 	},
 	"skeleton_warrior": {
 		"name": "Skeleton Warrior", "scene": BaseCharacterScene,
-		"stats": {"max_hp": 70, "current_hp": 70, "attack_power": 12, "defense": 8, "speed": 7, "crit_chance": 0.05, "crit_damage_multiplier": 1.5}, # Higher defense
-		"sprite": null # "res://assets/art/enemies/skeleton_warrior.png"
+		"stats": {"max_hp": 70, "current_hp": 70, "attack_power": 12, "defense": 8, "speed": 7, "crit_chance": 0.05, "crit_damage_multiplier": 1.5},
+		"sprite": null
 	},
 	"cultist_acolyte": {
 		"name": "Cultist Acolyte", "scene": BaseCharacterScene,
-		"stats": {"max_hp": 50, "current_hp": 50, "attack_power": 9, "defense": 4, "speed": 9, "crit_chance": 0.1, "crit_damage_multiplier": 1.6}, # Might have minor magic/debuffs later
-		"sprite": null # "res://assets/art/enemies/cultist_acolyte.png"
+		"stats": {"max_hp": 50, "current_hp": 50, "attack_power": 9, "defense": 4, "speed": 9, "crit_chance": 0.1, "crit_damage_multiplier": 1.6},
+		"sprite": null
 	},
 	"demon_imp": {
 		"name": "Demon Imp", "scene": BaseCharacterScene,
-		"stats": {"max_hp": 40, "current_hp": 40, "attack_power": 8, "defense": 3, "speed": 12, "crit_chance": 0.05, "crit_damage_multiplier": 1.5}, # Fast, maybe annoying debuffs
-		"sprite": null # "res://assets/art/enemies/demon_imp.png"
+		"stats": {"max_hp": 40, "current_hp": 40, "attack_power": 8, "defense": 3, "speed": 12, "crit_chance": 0.05, "crit_damage_multiplier": 1.5},
+		"sprite": null
 	},
 	"lava_elemental": {
 		"name": "Lava Elemental", "scene": BaseCharacterScene,
-		"stats": {"max_hp": 90, "current_hp": 90, "attack_power": 14, "defense": 6, "speed": 5, "crit_chance": 0.05, "crit_damage_multiplier": 1.7}, # Might have fire-based attacks/aura, resistant to fire
-		"sprite": null # "res://assets/art/enemies/lava_elemental.png"
+		"stats": {"max_hp": 90, "current_hp": 90, "attack_power": 14, "defense": 6, "speed": 5, "crit_chance": 0.05, "crit_damage_multiplier": 1.7},
+		"sprite": null
 	},
 	"lilithar_boss": {
-		"name": "Lilithar, Empress of Torment", # This name is overridden by Lilithar.gd's _init anyway
-		"scene": preload("res://scenes/lilithar.tscn"), # Special scene for Lilithar
-		"stats": {}, # Stats are defined in Lilithar.gd _init() and phases.
-		              # Can put base stats here if desired, but script will override.
-		"sprite": null # Sprite is handled by Lilithar.tscn and script.
+		"name": "Lilithar, Empress of Torment",
+		"scene": preload("res://scenes/lilithar.tscn"),
+		"stats": {},
+		"sprite": null # Sprite is handled by Lilithar.tscn's own exported character_sprite_texture or its script.
 	}
 }
 
@@ -113,27 +112,30 @@ func spawn_enemy(enemy_type_id: String, position: Vector2) -> BaseCharacter:
 
 	# Apply base stats and name
 	enemy_instance.name = data.name # Node name
-	# The character script's `name` property (if distinct) might also need setting
-	# For BaseCharacter, its node Name is usually what's displayed or used in logs.
 
 	for stat_name in data.stats:
-		if enemy_instance.has_meta(stat_name): # Check if property was exported with @export
+		if enemy_instance.has_meta(stat_name):
 			enemy_instance.set(stat_name, data.stats[stat_name])
-		elif stat_name in enemy_instance: # Fallback for direct property access
+		elif stat_name in enemy_instance:
 			enemy_instance.set(stat_name, data.stats[stat_name])
-		else:
-			printerr("Warning: Stat '%s' not found on enemy instance %s" % [stat_name, enemy_instance.name])
+		# else: printerr("Warning: Stat '%s' not found on enemy instance %s" % [stat_name, enemy_instance.name]) # Can be noisy
 
-	# Ensure current_hp is aligned with max_hp if not explicitly set different
 	if data.stats.has("max_hp") and not data.stats.has("current_hp"):
 		enemy_instance.current_hp = data.stats.max_hp
-	elif not data.stats.has("max_hp") and not data.stats.has("current_hp"): # Neither set, use default from script
+	elif not data.stats.has("max_hp") and not data.stats.has("current_hp"):
 		enemy_instance.current_hp = enemy_instance.max_hp
 
-
-	# Set sprite if defined (assuming BaseCharacter has set_sprite_texture method)
-	if data.has("sprite") and data.sprite and enemy_instance.has_method("set_sprite_texture"):
-		enemy_instance.call("set_sprite_texture", data.sprite)
+	# Set sprite texture if path is provided in enemy_type_data
+	var sprite_path_string = data.get("sprite", null) # Get sprite path, default to null
+	if sprite_path_string and not sprite_path_string.is_empty():
+		var enemy_texture: Texture = load(sprite_path_string)
+		if enemy_texture:
+			if enemy_instance.has_method("set_sprite_texture"):
+				enemy_instance.set_sprite_texture(enemy_texture)
+			else:
+				printerr("Enemy instance %s does not have set_sprite_texture method." % enemy_instance.name)
+		else:
+			printerr("Failed to load enemy texture: %s for %s" % [sprite_path_string, enemy_instance.name])
 
 	enemy_instance.position = position
 
@@ -156,11 +158,12 @@ func spawn_wave(enemies_to_spawn_data: Array) -> Array[BaseCharacter]: # Data li
 	for enemy_group in enemies_to_spawn_data:
 		var type = enemy_group.type
 		var count = enemy_group.count
+		var pos: Vector2 # Declare pos here
 		for i in range(count):
 			if current_spawn_index >= enemy_spawn_positions.size():
 				printerr("Not enough unique spawn positions defined for all enemies in wave.")
 				# Fallback: reuse positions or spawn at a default offset
-				var pos = enemy_spawn_positions[current_spawn_index % enemy_spawn_positions.size()] + Vector2(randf_range(-20,20), randf_range(-20,20))
+				pos = enemy_spawn_positions[current_spawn_index % enemy_spawn_positions.size()] + Vector2(randf_range(-20,20), randf_range(-20,20))
 			else:
 				pos = enemy_spawn_positions[current_spawn_index]
 

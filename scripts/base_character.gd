@@ -9,11 +9,12 @@ class_name BaseCharacter
 @export var crit_chance: float = 0.1 # 0.0 to 1.0
 @export var crit_damage_multiplier: float = 1.5 # e.g., 1.5 for 150% damage
 @export var speed: int = 10 # Determines turn order or action frequency
+@export var character_sprite_texture: Texture # For assigning in Inspector per character scene
 
 var audio_manager # Set by CombatManager or Game for direct sfx calls from character if needed.
 
 @onready var hp_label: Label = $HPLabel
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var visual_sprite: Sprite2D = $VisualSprite # Changed from 'sprite' to 'VisualSprite'
 # @onready var animation_player: AnimationPlayer = $AnimationPlayer # If animations are added
 
 signal health_changed(new_hp, max_hp)
@@ -22,6 +23,11 @@ signal critical_hit_landed_by_character(attacker_name) # For score system
 
 func _ready():
 	update_hp_label()
+	if character_sprite_texture:
+		if visual_sprite:
+			visual_sprite.texture = character_sprite_texture
+		else:
+			printerr("VisualSprite node not found in BaseCharacter scene for texture assignment. Name: %s" % name)
 	# You might want to emit health_changed here if current_hp can start differently from max_hp
 	# emit_signal("health_changed", current_hp, max_hp)
 
@@ -99,10 +105,20 @@ func ultimate_skill(targets: Array[BaseCharacter]):
 	print("%s uses Ultimate Skill (Not Implemented)" % name)
 	# Base implementation or pass
 
-# Utility to set sprite texture - useful for derived classes
-func set_sprite_texture(texture_path: String):
-	var loaded_texture = load(texture_path)
-	if loaded_texture:
-		sprite.texture = loaded_texture
+# Utility to set sprite texture - useful for derived classes or EnemySpawner
+func set_sprite_texture(new_texture: Texture):
+	character_sprite_texture = new_texture # Store the new texture resource
+	if visual_sprite:
+		visual_sprite.texture = new_texture
 	else:
-		print("Failed to load texture: %s" % texture_path)
+		# This might occur if called before _ready or if node is missing.
+		# If called before _ready, character_sprite_texture will be picked up by _ready.
+		printerr("VisualSprite node not found for direct texture set on %s. Texture stored, will apply in _ready if possible." % name)
+
+# Old version, for reference or if direct path loading is still needed elsewhere (less flexible)
+# func set_sprite_texture_from_path(texture_path: String):
+# 	var loaded_texture = load(texture_path)
+# 	if loaded_texture:
+# 		set_sprite_texture(loaded_texture) # Call the new method
+# 	else:
+# 		print("Failed to load texture from path: %s for %s" % [texture_path, name])

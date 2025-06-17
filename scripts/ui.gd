@@ -1,16 +1,26 @@
 extends Control
 
 @onready var player_stats_label: Label = $PlayerStatsLabel
-@onready var score_label: Label = $ScoreLabel # Added
-@onready var reward_notification_label: Label = $RewardNotificationLabel # Added
+@onready var score_label: Label = $ScoreLabel
+@onready var reward_notification_label: Label = $RewardNotificationLabel
+@onready var hp_icon_rect: TextureRect = $HPIcon # Added
+@onready var total_score_icon_rect: TextureRect = $TotalScoreIcon # Added
+
+@export var hp_icon_texture: Texture
+@export var total_score_icon_texture: Texture
 
 var notification_timer: Timer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("UI scene loaded")
-	update_stats(100, 0) # Initial stats for player_stats_label
-	update_score_display(0) # Initial total score
+	update_stats(100, 0)
+	update_score_display(0)
+
+	if hp_icon_texture and hp_icon_rect:
+		hp_icon_rect.texture = hp_icon_texture
+	if total_score_icon_texture and total_score_icon_rect:
+		total_score_icon_rect.texture = total_score_icon_texture
 
 	# Timer for hiding notification
 	notification_timer = Timer.new()
