@@ -62,10 +62,12 @@ var enemy_type_data: Dictionary = {
 		"sprite": null
 	},
 	"lilithar_boss": {
+
 		"name": "Lilithar, Empress of Torment",
 		"scene": preload("res://scenes/lilithar.tscn"),
 		"stats": {},
 		"sprite": null # Sprite is handled by Lilithar.tscn's own exported character_sprite_texture or its script.
+
 	}
 }
 

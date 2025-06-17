@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5w5a0n0q0x0x"]
+[gd_scene load_steps=3 format=3 uid="uid://b5w5a0n0q0x0x"]
 
-[ext_resource type="Script" path="res://scripts/base_character.gd" id="1_charscript"]
+[ext_resource type="Script" uid="uid://cccvplk1njosf" path="res://scripts/base_character.gd" id="1_charscript"]
+[ext_resource type="Texture2D" uid="uid://c0a8tdao1mxuc" path="res://assets/art/mage.jpg" id="2_ekxnf"]
 
 [node name="BaseCharacter" type="Node2D"]
 script = ExtResource("1_charscript")
+
 
 [node name="VisualSprite" type="Sprite2D" parent="."]
 # Placeholder texture, actual art will be assigned per character
@@ -26,5 +28,5 @@ vertical_alignment = 1
 # shape = SubResource("CircleShape2D_xxxx") # Example, would need SubResource definition
 pass
 
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-pass
